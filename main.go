@@ -4,13 +4,20 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
+	"path/filepath"
 )
 
 var ErrStruct error = fmt.Errorf("directory structure is not expected")
 var ErrSyntax error = fmt.Errorf("syntax error")
 
 func main() {
+	// check command-line args
+	if len(os.Args) != 2 {
+		log.Fatal("wrong argments")
+	}
+
 	dir, err := readDirStructDef(readJson())
 	if err != nil {
 		fmt.Println("false")
@@ -60,7 +67,7 @@ func checkDirContents(dir Directory, que *Queue) error {
 			if !dirEntry.IsDir() {
 				return ErrStruct
 			}
-			que.push(Directory{dir: childDir, path: dir.path + "/" + name})
+			que.push(Directory{dir: childDir, path: filepath.Join(dir.path, name)})
 		} else if value == nil {
 			// if file
 			if dirEntry.IsDir() {
@@ -75,7 +82,7 @@ func checkDirContents(dir Directory, que *Queue) error {
 
 func checkAllDirStruct(totalDirStruct map[string]interface{}) error {
 	var que Queue
-	que.push(Directory{dir: totalDirStruct, path: "."})
+	que.push(Directory{dir: totalDirStruct, path: os.Args[1]})
 	for !que.isEmpty() {
 		err := checkDirContents(que.pop(), &que)
 		if err != nil {
