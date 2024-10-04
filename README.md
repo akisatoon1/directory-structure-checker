@@ -2,11 +2,11 @@
 ## description
 Check whether the directory structure defined by the user matches the actual directory structure.
 ## how to use
-This tool check user's working directory. Pass the directory structure definition written in json to standard input. The syntax of the definition is explained in syntax seciton below. The result is true or false.
+This tool check the directory indicated by the first argument path. Pass the directory structure definition written in json to standard input. The syntax of the definition is explained in syntax seciton below. The result is true or false.
   
 example:
 ```
-dir-struct-check < structure_definition.json
+dir-struct-check ./path/to/dir < structure_definition.json
 ```
 output:
 ```
