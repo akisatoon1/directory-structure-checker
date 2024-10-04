@@ -37,7 +37,7 @@ The key is file name, and the value must be null.
 }
 ```
 ### directory
-The key is file name, and the value must be object.
+The key is directory name, and the value must be object.
 ```
 {
     "directory name": {
