@@ -1,9 +1,9 @@
 #!/bin/bash
 
-wd=`pwd`
-test_dirs="${wd}/test-dirs"
-jsons="${wd}/jsons"
-bin="${wd}/dir-struct-check"
+script_dir=$(cd $(dirname $0); pwd)
+test_dirs="${script_dir}/test-dirs"
+jsons="${script_dir}/jsons"
+bin="${script_dir}/dir-struct-check"
 
 # assert(output str, expected str)
 function assert() {
